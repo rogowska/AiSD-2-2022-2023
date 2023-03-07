@@ -116,25 +116,35 @@ T BinaryHeap<T>::DequeueMin()
             {
                 data[empty_index] = data[child1_index];
                 empty_index = child1_index;
-                child1_index = 2*child1_index + 1;
-                child1 = data[child1_index];
             }
             else
             {
                 data[empty_index] = data[child2_index];
                 empty_index = child2_index;
-                child2_index = 2*child2_index + 2;
-                child2 = data[child2_index];
             }
+            child1_index = 2 * empty_index + 1;
+            child2_index = 2 * empty_index + 2;
+            child1 = data[child1_index];
+            child2 = data[child2_index];
         }
-        if(child1 == 0){
-            if(child2 != 0){
-                data[empty_index] = data[child2_index];
-            }
+        if (child1_index == count - 1)
+        {
+            data[empty_index] = data[child1_index];
         }
-        else{
-            if(child1 != 0){
-                data[empty_index] = data[child1_index];
+        else
+        {
+            if (child2_index == count - 1)
+            {
+                if (child1 < child2)
+                {
+                    data[empty_index] = data[child1_index];
+                    empty_index = child1_index;
+                }
+                else
+                {
+                    data[empty_index] = data[child2_index];
+                    empty_index = child2_index;
+                }
             }
         }
     }
