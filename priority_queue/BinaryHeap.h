@@ -22,6 +22,9 @@ public:
     bool IsFull() const;
     unsigned int Count() const { return count; }
     void Print() const;
+private:
+    T FindParent(int index);
+    int FindParentIndex(int index);
 };
 
 template <typename T>
@@ -64,6 +67,17 @@ bool BinaryHeap<T>::IsFull() const
 }
 
 template <typename T>
+int BinaryHeap<T>::FindParentIndex(int index){
+    return (index - 1) / 2;
+}
+
+template <typename T>
+T BinaryHeap<T>::FindParent(int index){
+    int parent_index = FindParentIndex(index);
+    return data[parent_index];
+}
+
+template <typename T>
 void BinaryHeap<T>::Enqueue(T element)
 {
     if (IsFull())
@@ -77,18 +91,16 @@ void BinaryHeap<T>::Enqueue(T element)
     if (count > 1)
     {
         int element_index = count - 1;
-        int parent_index = (element_index - 1) / 2;
-        T parent = data[parent_index];
+        T parent = FindParent(element_index);
 
         while (!(parent < element) && !(element_index == 0))
         {
             // swapping parent with element
-            data[parent_index] = data[element_index];
-            data[element_index] = parent;
+            std::swap(data[FindParentIndex(element_index)], data[element_index]);
+            
             // searching for new parent
-            element_index = parent_index;
-            parent_index = (parent_index - 1) / 2;
-            parent = data[parent_index];
+            element_index = FindParentIndex(element_index);
+            parent = FindParent(element_index);
         }
     }
 }
