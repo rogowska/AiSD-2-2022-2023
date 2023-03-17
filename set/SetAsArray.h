@@ -34,7 +34,10 @@ public:
     // o metodzie Accept powiemy na następnych zajęciach
 };
 
-void SetAsArray::MakeNull(){}
+void SetAsArray::MakeNull(){
+    count = 0;
+    universeSize = 0;
+}
 
 
 bool SetAsArray::IsMember(int element) const {
@@ -43,17 +46,17 @@ bool SetAsArray::IsMember(int element) const {
 
 void SetAsArray::Display()
 {
+    std::cout << "[ ";
     for (int i = 0; i < count; i++)
     {
-        std::cout << "[ ";
-        std::cout << array[i] << " " << std::endl;
-        std::cout << "]";
+        std::cout << array[i] << " ";
     }
+    std::cout << "]"<<std::endl;
 }
 
 SetAsArray::SetAsArray(unsigned int n)
 {
-    std::vector<bool> array(n);
+    array.resize(n);
     for (bool element : array)
     {
         element = false;
@@ -80,7 +83,7 @@ SetAsArray operator+(SetAsArray const &s, SetAsArray const &t)
     {
         unsigned int size = t.universeSize;
         SetAsArray output_set(size);
-        for (int i; i < size; i++)
+        for (int i = 0; i < size; i++)
         {
             if (s.array[i] || t.array[i])
             {
@@ -97,7 +100,7 @@ SetAsArray operator*(SetAsArray const &s, SetAsArray const &t)
     {
         unsigned int size = t.universeSize;
         SetAsArray output_set(size);
-        for (int i; i < size; i++)
+        for (int i = 0; i < size; i++)
         {
             if (s.array[i] && t.array[i])
             {
@@ -114,7 +117,7 @@ SetAsArray operator-(SetAsArray const &s, SetAsArray const &t)
     {
         unsigned int size = t.universeSize;
         SetAsArray output_set(size);
-        for (int i; i < size; i++)
+        for (int i = 0; i < size; i++)
         {
             if (s.array[i] && !t.array[i])
             {

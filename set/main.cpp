@@ -9,7 +9,7 @@ int main()
 
     for (int i = 0; i < A.UniverseSize(); i++)
     {
-        if (!(i % 2))
+        if (!(i % 2) && i!=0)
         {
             A.Insert(i);
         }
