@@ -2,6 +2,7 @@
 #define SETASARRAY_H
 
 #include <vector>
+#include <iostream>
 #include "Set.h"
 
 class SetAsArray : public Set<int>
@@ -15,6 +16,7 @@ public:
     void Insert(int element);
     bool IsMember(int element) const;
     void Withdraw(int element);
+    void Display();
 
     // friend- funkcja uzyska prawo dostepu do prywatnych elementów danej klasy.
     friend SetAsArray operator+(
@@ -30,6 +32,16 @@ public:
     // void Accept (Visitor&) const{};
     // o metodzie Accept powiemy na następnych zajęciach
 };
+
+void SetAsArray::Display()
+{
+    for (int i = 0; i < count; i++)
+    {
+        std::cout << "[ ";
+        std::cout << array[i] << " " << std::endl;
+        std::cout << "]";
+    }
+}
 
 SetAsArray::SetAsArray(unsigned int n)
 {
@@ -54,11 +66,99 @@ void SetAsArray::Withdraw(int element)
     count--;
 }
 
-SetAsArray operator+(SetAsArray const & s, SetAsArray const & t) {
-    unsigned int size = t.UniverseSize();
-    SetAsArray output_array(size);
-    
+SetAsArray operator+(SetAsArray const &s, SetAsArray const &t)
+{
+    if (s.universeSize == t.universeSize)
+    {
+        unsigned int size = t.universeSize;
+        SetAsArray output_set(size);
+        for (int i; i < size; i++)
+        {
+            if (s.array[i] || t.array[i])
+            {
+                output_set.array[i] = true;
+            }
+        }
+        return output_set;
+    }
+}
 
+SetAsArray operator*(SetAsArray const &s, SetAsArray const &t)
+{
+    if (s.universeSize == t.universeSize)
+    {
+        unsigned int size = t.universeSize;
+        SetAsArray output_set(size);
+        for (int i; i < size; i++)
+        {
+            if (s.array[i] && t.array[i])
+            {
+                output_set.array[i] = true;
+            }
+        }
+        return output_set;
+    }
+}
+
+SetAsArray operator-(SetAsArray const &s, SetAsArray const &t)
+{
+    if (s.universeSize == t.universeSize)
+    {
+        unsigned int size = t.universeSize;
+        SetAsArray output_set(size);
+        for (int i; i < size; i++)
+        {
+            if (s.array[i] && !t.array[i])
+            {
+                output_set.array[i] = true;
+            }
+        }
+        return output_set;
+    }
+}
+
+bool operator==(SetAsArray const &s, SetAsArray const &t)
+{
+    bool flag = false;
+    if ((s.universeSize == t.universeSize) && (s.count == t.count))
+    {
+        int i = 0;
+        while (s.array[i] == t.array[i])
+        {
+            i++;
+        }
+        // passed successfully through all elements
+        if (s.count == (i + 1))
+        {
+            flag = true;
+        }
+    }
+    else
+    {
+        return flag;
+    }
+}
+
+bool operator<=(SetAsArray const &s, SetAsArray const &t)
+{
+    bool flag = false;
+    if ((s.universeSize == t.universeSize) && (s.count == t.count))
+    {
+        int i = 0;
+        while (!(s.array[i] || !t.array[i]))
+        {
+            i++;
+        }
+        // passed successfully through all elements
+        if (s.count == (i + 1))
+        {
+            flag = true;
+        }
+    }
+    else
+    {
+        return flag;
+    }
 }
 
 #endif
