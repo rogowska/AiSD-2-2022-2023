@@ -54,15 +54,11 @@ void SetAsArray::Withdraw(int element)
     count--;
 }
 
-SetAsArray SetAsArray::operator+(SetAsArray const & s, SetAsArray const & t) {
-    SetAsArray newArray = SetAsArray(s.UniverseSize());
-    for(int i = 0; i<UniverseSize(); i++){
-        if((s[i]==true) || (t[i]==true)){
-            newArray[i] = true;
-            newArray.count++;
-        }
-    }
-    return newArray;
+SetAsArray operator+(SetAsArray const & s, SetAsArray const & t) {
+    unsigned int size = t.UniverseSize();
+    SetAsArray output_array(size);
+    
+
 }
 
 #endif
