@@ -1,4 +1,4 @@
-#include <SetAsArray.h>
+#include "SetAsArray.h"
 
 int main()
 {
@@ -26,5 +26,17 @@ int main()
     C = A + B;
     D = C - B;
 
-    
+    A.Display();
+    B.Display();
+    C.Display();
+    D.Display();
+
+    std::cout << (D == A) << std::endl;
+    std::cout << (D <= A) << std::endl;
+    std::cout << (C == B) << std::endl;
+    std::cout << (B <= C) << std::endl;
+
+    A.Insert(1);
+    std::cout << (D == A) << std::endl;
+    std::cout << (D <= A) << std::endl;
 }

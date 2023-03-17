@@ -11,8 +11,9 @@ class SetAsArray : public Set<int>
 
 public:
     SetAsArray(unsigned int n);
+    
     void MakeNull(); // metody z containera
-    bool IsFull() const { return (Count() == UniverseSize()); };
+    bool IsFull() const { return (Count() == UniverseSize()); }
     void Insert(int element);
     bool IsMember(int element) const;
     void Withdraw(int element);
@@ -32,6 +33,13 @@ public:
     // void Accept (Visitor&) const{};
     // o metodzie Accept powiemy na następnych zajęciach
 };
+
+void SetAsArray::MakeNull(){}
+
+
+bool SetAsArray::IsMember(int element) const {
+   return array[element];
+}
 
 void SetAsArray::Display()
 {
