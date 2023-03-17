@@ -47,7 +47,7 @@ bool SetAsArray::IsMember(int element) const {
 void SetAsArray::Display()
 {
     std::cout << "[ ";
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < universeSize; i++)
     {
         std::cout << array[i] << " ";
     }
@@ -88,6 +88,7 @@ SetAsArray operator+(SetAsArray const &s, SetAsArray const &t)
             if (s.array[i] || t.array[i])
             {
                 output_set.array[i] = true;
+                output_set.count++;
             }
         }
         return output_set;
@@ -105,6 +106,7 @@ SetAsArray operator*(SetAsArray const &s, SetAsArray const &t)
             if (s.array[i] && t.array[i])
             {
                 output_set.array[i] = true;
+                output_set.count++;
             }
         }
         return output_set;
@@ -122,6 +124,7 @@ SetAsArray operator-(SetAsArray const &s, SetAsArray const &t)
             if (s.array[i] && !t.array[i])
             {
                 output_set.array[i] = true;
+                output_set.count++;
             }
         }
         return output_set;
@@ -134,42 +137,36 @@ bool operator==(SetAsArray const &s, SetAsArray const &t)
     if ((s.universeSize == t.universeSize) && (s.count == t.count))
     {
         int i = 0;
-        while (s.array[i] == t.array[i])
+        while (s.array[i] == t.array[i] && i<s.universeSize)
         {
             i++;
         }
         // passed successfully through all elements
-        if (s.count == (i + 1))
+        if (s.universeSize == i)
         {
             flag = true;
         }
     }
-    else
-    {
         return flag;
-    }
 }
 
 bool operator<=(SetAsArray const &s, SetAsArray const &t)
 {
     bool flag = false;
-    if ((s.universeSize == t.universeSize) && (s.count == t.count))
+    if ((s.universeSize == t.universeSize) && (s.count <= t.count))
     {
         int i = 0;
-        while (!(s.array[i] || !t.array[i]))
+        while ((!(s.array[i] && !t.array[i])) && i<t.universeSize)
         {
             i++;
         }
         // passed successfully through all elements
-        if (s.count == (i + 1))
+        if (s.universeSize == i)
         {
             flag = true;
         }
     }
-    else
-    {
         return flag;
-    }
 }
 
 #endif

@@ -9,7 +9,7 @@ int main()
 
     for (int i = 0; i < A.UniverseSize(); i++)
     {
-        if (!(i % 2) && i!=0)
+        if (!(i % 2) || i == 0)
         {
             A.Insert(i);
         }
@@ -17,7 +17,7 @@ int main()
 
     for (int i = 0; i < B.UniverseSize(); i++)
     {
-        if ((i % 2))
+        if ((i % 2) && i != 0)
         {
             B.Insert(i);
         }
@@ -26,17 +26,22 @@ int main()
     C = A + B;
     D = C - B;
 
+    std::cout<< "A: ";
     A.Display();
+    std::cout<< "B: ";
     B.Display();
+    std::cout<< "C: ";
     C.Display();
+    std::cout<< "D: ";
     D.Display();
 
-    std::cout << (D == A) << std::endl;
-    std::cout << (D <= A) << std::endl;
-    std::cout << (C == B) << std::endl;
-    std::cout << (B <= C) << std::endl;
+    std::cout << "D == A: " << (D == A) << std::endl;
+    std::cout << "D <= A: " << (D <= A) << std::endl;
+    std::cout << "C == B: " << (C == B) << std::endl;
+    std::cout << "B <= C: " << (B <= C) << std::endl;
 
     A.Insert(1);
-    std::cout << (D == A) << std::endl;
-    std::cout << (D <= A) << std::endl;
+
+    std::cout << "D == A: " << (D == A) << std::endl;
+    std::cout << "D <= A: " << (D <= A) << std::endl;
 }
