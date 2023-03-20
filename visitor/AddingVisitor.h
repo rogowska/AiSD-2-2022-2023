@@ -14,11 +14,13 @@ public:
     T GetSum();
 };
 
+template <typename T>
 void AddingVisitor<T>::Visit(T &element)
 {
     sum = +element;
 }
 
+template <typename T>
 T AddingVisitor<T>::GetSum(){
     return sum;
 }
