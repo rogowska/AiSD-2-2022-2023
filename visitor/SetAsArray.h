@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Set.h"
+#include "Visitor.h"
 
 class SetAsArray : public Set<int>
 {
@@ -30,18 +31,21 @@ public:
         SetAsArray const &, SetAsArray const &);
     friend bool operator<=(
         SetAsArray const &, SetAsArray const &);
-    void Accept(Visitor &visitor) const {};
+    void Accept(Visitor<int> &visitor) const {};
 };
 
-void SetAsArray::Accept(Visitor &visitor) const(
-    for (int i = 0; i < universeSize(); i++) {
+void SetAsArray::Accept(Visitor<int> &visitor) const
+{
+    for (int i = 0; i < universeSize; i++)
+    {
         if (array[i] == true)
         {
-            visitor.visit(i);
+            visitor.Visit(i);
         }
-    })
+    }
+}
 
-    void SetAsArray::MakeNull()
+void SetAsArray::MakeNull()
 {
     count = 0;
     universeSize = 0;
