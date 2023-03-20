@@ -46,11 +46,11 @@ int main()
     std::cout << "D == A: " << (D == A) << std::endl;
     std::cout << "D <= A: " << (D <= A) << std::endl;
 
+    //adding visitor
     A.Insert(5);
     AddingVisitor<int> v_A;
     A.Accept(v_A);
     std::cout << v_A.GetSum() << std::endl;
-    
     SetAsArray E(10);
     E = A * B;
     AddingVisitor<int> v_E;
@@ -58,4 +58,13 @@ int main()
     std::cout << v_E.GetSum() << std::endl;
     E.Withdraw(1);
     E.Accept(v_E);
+
+    //odd visitor
+    //Sprawdzenie czy w zbiorze B jest liczba nieparzysta (korzystając z wizytatora)
+    //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
+    A.Withdraw(1);
+    A.Withdraw(5);
+    //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
+    //Proszę na potrzeby sprawdzenia, czy działa IsDone(), wypisać na której komórce funkcja
+    //Accept() zakończyła przeglądanie
 }
