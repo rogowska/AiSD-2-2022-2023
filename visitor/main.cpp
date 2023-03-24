@@ -62,8 +62,8 @@ int main()
     //odd visitor
     //Sprawdzenie czy w zbiorze B jest liczba nieparzysta (korzystając z wizytatora)
     //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
-    A.Withdraw(1);
-    A.Withdraw(5);
+    //A.Withdraw(1);
+    //A.Withdraw(5);
     //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
     //Proszę na potrzeby sprawdzenia, czy działa IsDone(), wypisać na której komórce funkcja
     //Accept() zakończyła przeglądanie

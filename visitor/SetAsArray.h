@@ -31,10 +31,10 @@ public:
         SetAsArray const &, SetAsArray const &);
     friend bool operator<=(
         SetAsArray const &, SetAsArray const &);
-    void Accept(Visitor<int> &visitor) const {};
+    void Accept(Visitor<int> &visitor);
 };
 
-void SetAsArray::Accept(Visitor<int> &visitor) const
+void SetAsArray::Accept(Visitor<int> &visitor)
 {
     for (int i = 0; i < universeSize; i++)
     {
