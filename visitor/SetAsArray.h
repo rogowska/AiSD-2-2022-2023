@@ -38,13 +38,11 @@ void SetAsArray::Accept(Visitor<int> &visitor)
 {
     for (int i = 0; i < universeSize; i++)
     {
-        while (!visitor.IsDone())
-        {
             if (array[i] == true)
             {
                 visitor.Visit(i);
             }
-        }
+        
     }
 }
 

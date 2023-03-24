@@ -1,6 +1,8 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
+#include "Visitor.h"
+
 template<typename T>
 class Container
 {

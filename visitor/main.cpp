@@ -1,5 +1,6 @@
 #include "SetAsArray.h"
 #include "AddingVisitor.h"
+#include "OddVisitor.h"
 
 int main()
 {
@@ -48,22 +49,26 @@ int main()
 
     //adding visitor
     A.Insert(5);
-    AddingVisitor<int> v_A;
-    A.Accept(v_A);
-    std::cout << v_A.GetSum() << std::endl;
+    AddingVisitor<int> av_A;
+    A.Accept(av_A);
+    std::cout << "Sum in A set: "<< av_A.GetSum() << std::endl;
     SetAsArray E(10);
     E = A * B;
-    AddingVisitor<int> v_E;
-    E.Accept(v_E);
-    std::cout << v_E.GetSum() << std::endl;
+    AddingVisitor<int> av_E;
+    E.Accept(av_E);
+    std::cout <<"Sum in E set: "<< av_E.GetSum() << std::endl;
     E.Withdraw(1);
-    E.Accept(v_E);
+    E.Accept(av_E);
+    std::cout <<"Sum in E set after withdraw: "<< av_E.GetSum() << std::endl;
 
     //odd visitor
-    //Sprawdzenie czy w zbiorze B jest liczba nieparzysta (korzystając z wizytatora)
-    //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
-    //A.Withdraw(1);
-    //A.Withdraw(5);
+    OddVisitor<int> ov_A;
+    OddVisitor<int> ov_B;
+
+    B.Accept(ov_B);
+    A.Accept(ov_A);
+    A.Withdraw(1);
+    A.Withdraw(5);
     //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
     //Proszę na potrzeby sprawdzenia, czy działa IsDone(), wypisać na której komórce funkcja
     //Accept() zakończyła przeglądanie

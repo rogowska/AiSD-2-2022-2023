@@ -9,21 +9,16 @@ class AddingVisitor : public virtual Visitor<T>
     T sum;
 
 public:
-    AddingVisitor(){};
+    AddingVisitor(): sum(0){};
     void Visit(T &element);
     bool IsDone() const { return false; }
     T GetSum();
 };
 
-template<typename T>
-AddingVisitor<T>::AddingVisitor(){
-    sum = 0;
-}
-
 template <typename T>
 void AddingVisitor<T>::Visit(T &element)
 {
-    sum = +element;
+    sum = sum + element;
 }
 
 template <typename T>
