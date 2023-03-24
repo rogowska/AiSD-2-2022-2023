@@ -17,6 +17,7 @@ public:
     }
     bool IsDone() const { return isOdd; }
     bool IsOdd() { return isOdd; }
+    void VisitorReset() {isOdd =false;}
 };
 
 #endif

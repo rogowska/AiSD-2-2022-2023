@@ -13,6 +13,7 @@ public:
     void Visit(T &element);
     bool IsDone() const { return false; }
     T GetSum();
+    void VisitorReset() {sum=0;}
 };
 
 template <typename T>
