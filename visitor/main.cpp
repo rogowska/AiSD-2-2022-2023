@@ -66,10 +66,12 @@ int main()
     OddVisitor<int> ov_B;
 
     B.Accept(ov_B);
+    std::cout <<"Odd number found B set: "<< ov_B.IsOdd() << std::endl;
     A.Accept(ov_A);
+    std::cout <<"Odd number found A set: "<< ov_A.IsOdd() << std::endl;
     A.Withdraw(1);
     A.Withdraw(5);
-    //Sprawdzenie czy w zbiorze A jest liczba nieparzysta (korzystając z wizytatora)
-    //Proszę na potrzeby sprawdzenia, czy działa IsDone(), wypisać na której komórce funkcja
-    //Accept() zakończyła przeglądanie
+    A.Accept(ov_A);
+    std::cout <<"Odd number found A set after withdraw: "<< ov_A.IsOdd() << std::endl;
+
 }

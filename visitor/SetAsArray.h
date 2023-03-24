@@ -36,7 +36,8 @@ public:
 
 void SetAsArray::Accept(Visitor<int> &visitor)
 {
-    for (int i = 0; i < universeSize; i++)
+    int i;
+    for (i = 0; i < universeSize && !visitor.IsDone(); i++)
     {
             if (array[i] == true)
             {
@@ -44,6 +45,7 @@ void SetAsArray::Accept(Visitor<int> &visitor)
             }
         
     }
+    std::cout<<"Visitor ended a visit at index: "<<i<<std::endl;
 }
 
 void SetAsArray::MakeNull()
