@@ -38,9 +38,12 @@ void SetAsArray::Accept(Visitor<int> &visitor) const
 {
     for (int i = 0; i < universeSize; i++)
     {
-        if (array[i] == true)
+        while (!visitor.IsDone())
         {
-            visitor.Visit(i);
+            if (array[i] == true)
+            {
+                visitor.Visit(i);
+            }
         }
     }
 }
