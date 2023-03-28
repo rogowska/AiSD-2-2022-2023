@@ -1,3 +1,6 @@
+#ifndef ITERATOR_H
+#define ITERATOR_H
+
 template <typename T>
 class Iterator
 {
@@ -8,3 +11,5 @@ public:
     virtual const T &operator*() = 0;
     virtual void operator++() = 0;
 };
+
+#endif

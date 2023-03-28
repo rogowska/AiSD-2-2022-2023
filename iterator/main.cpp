@@ -1,6 +1,7 @@
 #include "SetAsArray.h"
 #include "AddingVisitor.h"
 #include "OddVisitor.h"
+#include "Iterator.h"
 
 int main()
 {
@@ -76,4 +77,21 @@ int main()
     /*Wypisz elementy zbioru A korzystając z iteratora
 
     Wypisz elementy zbioru B korzystając z iteratora*/
+
+    SetAsArray::Iter &it = A.NewIterator();
+    SetAsArray::Iter &it2 = B.NewIterator();
+
+    while (!it.IsDone())
+    {
+        std::cout << *it << " ";
+        ++it;
+    };
+    std::cout << *it << std::endl;
+
+        while (!it2.IsDone())
+    {
+        std::cout << *it2 << " ";
+        ++it2;
+    };
+    std::cout << *it2 << std::endl;
 }

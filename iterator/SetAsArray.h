@@ -9,6 +9,9 @@
 
 class SetAsArray : public Set<int>
 {
+    std::vector<bool> array;
+
+public:
     class Iter : public Iterator<int>
     {
         std::vector<bool> data;
@@ -18,27 +21,39 @@ class SetAsArray : public Set<int>
     public:
         Iter(std::vector<bool> array, int us)
         {
+            int i = 0;
             data = array;
             universeSize = us;
-            for (int i = 0; i < universeSize && data[i] == false; i++)
+            while (i < universeSize && data[i] == false)
             {
-                index = i;
+                i++;
             }
+            index = i;
         }
-        ~Iter();
+        ~Iter() {}
         const int &operator*() { return index; }
         void operator++()
         {
-            for (int i = index + 1; i < universeSize && data[i] == false; i++)
+            int i = index + 1;
+            while (i < universeSize && data[i] == false)
             {
-                index = i;
+                i++;
             }
-        };
-        bool IsDone() const { return index == universeSize; }
-    };
-    std::vector<bool> array;
+            index = i;
 
-public:
+        };
+        bool IsDone() const
+        {
+            int i = index + 1;
+            while (i < universeSize && data[i] == false)
+            {
+                i++;
+            }
+            return (i == universeSize);
+
+        }
+    };
+
     SetAsArray(unsigned int n);
 
     void MakeNull(); // metody z containera
