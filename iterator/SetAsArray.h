@@ -16,11 +16,25 @@ class SetAsArray : public Set<int>
         int index;
 
     public:
-        Iter(std::vector<bool> array, int us);
+        Iter(std::vector<bool> array, int us)
+        {
+            data = array;
+            universeSize = us;
+            for (int i = 0; i < universeSize && data[i] == false; i++)
+            {
+                index = i;
+            }
+        }
         ~Iter();
-        const int &operator*();
-        void operator++();
-        bool IsDone() const;
+        const int &operator*() { return index; }
+        void operator++()
+        {
+            for (int i = index + 1; i < universeSize && data[i] == false; i++)
+            {
+                index = i;
+            }
+        };
+        bool IsDone() const { return index == universeSize; }
     };
     std::vector<bool> array;
 
