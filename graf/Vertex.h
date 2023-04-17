@@ -3,7 +3,7 @@
 class Vertex
 {
     int number;
-
+    
 public:
     int weight;
     std::string label;
