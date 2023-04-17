@@ -59,9 +59,24 @@ class GraphAsMatrix
     };*/
 
 public:
-    GraphAsMatrix(int n, bool b);
+    GraphAsMatrix(int n, bool b){
+        isDirected = b;
+        numberOfVertices = n;
+        for(int i = 0; i < n; i++){
+            Vertex v(i);
+            vertices.push_back(&v);
+        }
+        //tworzenie macierzy sasiedztwa nxn i wypelnienie nullami
+        std::vector<Edge *> column(n, nullptr);
+        for(int i = 0; i < n; i++){
+            adjacencyMatrix.push_back(column);
+        }
+    }
     int NumberOfVertices();
-    bool IsDirected();
+    bool IsDirected()
+    {
+        return isDirected;
+    }
     int NumberOfEdges();
     bool IsEdge(int u, int v);
     void MakeNull();
