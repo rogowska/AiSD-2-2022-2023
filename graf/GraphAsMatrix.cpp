@@ -59,30 +59,83 @@ class GraphAsMatrix
     };*/
 
 public:
-    GraphAsMatrix(int n, bool b){
-        isDirected = b;
-        numberOfVertices = n;
-        for(int i = 0; i < n; i++){
-            Vertex v(i);
-            vertices.push_back(&v);
-        }
-        //tworzenie macierzy sasiedztwa nxn i wypelnienie nullami
+    void createAdjacencyMatrix(int n)
+    {
         std::vector<Edge *> column(n, nullptr);
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++)
+        {
             adjacencyMatrix.push_back(column);
         }
     }
-    int NumberOfVertices();
+    GraphAsMatrix(int n, bool b)
+    {
+        isDirected = b;
+        numberOfVertices = n;
+        for (int i = 0; i < n; i++)
+        {
+            Vertex v(i);
+            vertices.push_back(&v);
+        }
+        createAdjacencyMatrix(n);
+    }
+
+    int NumberOfVertices()
+    {
+        return numberOfVertices;
+    }
+
     bool IsDirected()
     {
         return isDirected;
     }
-    int NumberOfEdges();
-    bool IsEdge(int u, int v);
-    void MakeNull();
-    void AddEdge(int u, int v);
-    Edge *SelectEdge(int u, int v);
-    Vertex *SelectVertex(int v);
+
+    int NumberOfEdges()
+    {
+        return numberOfEdges;
+    }
+
+    bool IsEdge(int u, int v)
+    {
+        bool ifEdgeExists = false;
+        if (u && v < numberOfVertices)
+        {
+        }
+        else if (adjacencyMatrix[u][v] != NULL)
+        {
+            ifEdgeExists = true;
+        }
+        return ifEdgeExists;
+    }
+
+    void MakeNull()
+    {
+        for (int i = 0; i < numberOfVertices; i++)
+        {
+            for (int j = 0; j < numberOfVertices; j++)
+                adjacencyMatrix[i][j] = NULL;
+        }
+        numberOfEdges = 0;
+    }
+
+    void AddEdge(int u, int v)
+    {
+        if (!IsEdge(u, v))
+        {
+            Edge newEdge = Edge(vertices[u], vertices[v]);
+            adjacencyMatrix[u][v] = &newEdge;
+        }
+    }
+
+    Edge *SelectEdge(int u, int v)
+    {
+        if (IsEdge(u, v))
+            return adjacencyMatrix[u][v];
+    }
+
+    Vertex *SelectVertex(int v)
+    {
+        return vertices[v];
+    }
 
     /*Iterator<Vertex> &VerticesIter();
     Iterator<Edge> &EdgesIter();
