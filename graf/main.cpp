@@ -1,19 +1,34 @@
 #include "GraphAsMatrix.h"
 #include <iostream>
 
-int main()
+void EdgeTest(GraphAsMatrix graph, int u, int v)
 {
-    test(true);
-    test(false);
+    std::cout << "Test for edge (" << u << "," << v << ")" << std::endl;
 
-    //Dla kolejnych krawędzi grafu powtórz ostatnie 7 kroków(e = SelectEdge(2, 3),…)
+    Edge *e = graph.SelectEdge(u, v);
+
+    // Wypisz V0 dla e
+    // Wypisz V1 dla e
+    std::cout << "V0 of edge: " << e->V0()->Number() << std::endl;
+    std::cout << "V1 of edge: " << e->V1()->Number() << std::endl;
+
+    // Wypisz sąsiada(V0) dla e // test metody Mate
+    // Wypisz sąsiada(V1) dla e // test metody Mate
+    std::cout << "Neighbor of V0 for edge: " << e->Mate(e->V0())->Number() << std::endl;
+    std::cout << "Neighbor of V1 for edge: " << e->Mate(e->V1())->Number() << std::endl;
+
+    // Nadaj krawędzi e wagę V0 + V1
+    // Wypisz wagę krawędzi e
+    e->weight = e->V0()->Number() + e->V1()->Number();
+    std::cout <<"Weight of edge: "<< e->weight << std::endl<<std::endl;
 }
 
-void test(bool IsDirected){
-    if(IsDirected)
-        std::cout<<"Test for directed graph"<<std::endl;
+void test(bool IsDirected)
+{
+    if (IsDirected)
+        std::cout << "Test for directed graph" << std::endl<<std::endl;
     else
-        std::cout<<"Test for undirected graph"<<std::endl;
+        std::cout << "Test for undirected graph" << std::endl<<std::endl;
 
     // Utwórz graf złożony z 10 wierzchołków
     GraphAsMatrix graph(10, IsDirected);
@@ -51,36 +66,18 @@ void test(bool IsDirected){
     // Wypisz, czy istnieje krawędź (2,1)
     std::cout << "If edge (1,1) exists: " << graph.IsEdge(1, 1) << std::endl;
     std::cout << "If edge (1,2) exists: " << graph.IsEdge(1, 2) << std::endl;
-    std::cout << "If edge (2,1) exists: " << graph.IsEdge(2, 1) << std::endl;
+    std::cout << "If edge (2,1) exists: " << graph.IsEdge(2, 1) << std::endl<<std::endl;
 
     EdgeTest(graph, 1, 2);
     EdgeTest(graph, 2, 3);
     EdgeTest(graph, 3, 4);
-    EdgeTest(graph, 4, 5);
-    EdgeTest(graph, 5, 6);
-    EdgeTest(graph, 6, 7);
-    EdgeTest(graph, 7, 8);
-    EdgeTest(graph, 8, 9);
-    EdgeTest(graph, 9, 10);
+    EdgeTest(graph, 9, 9);
 }
 
-void EdgeTest(GraphAsMatrix graph, int u, int v){
-    std::cout<<"Test for edge ("<<u<<","<<v<<")"<<std::endl;
+int main()
+{
+    test(true);
+    test(false);
 
-    Edge *e = graph.SelectEdge(u, v);
-            
-    //Wypisz V0 dla e
-    //Wypisz V1 dla e
-    std::cout<<"V0 of e: "<<e->V0()<<std::endl;
-    std::cout<<"V1 of e: "<<e->V1()<<std::endl;
-
-    //Wypisz sąsiada(V0) dla e // test metody Mate
-    //Wypisz sąsiada(V1) dla e // test metody Mate
-    std::cout<<"Neighbor of V0 for e: "<<e->Mate(e->V0())<<std::endl; 
-    std::cout<<"Neighbor of V1 for e: "<<e->Mate(e->V1())<<std::endl;           
-                            
-    //Nadaj krawędzi e wagę V0 + V1
-    //Wypisz wagę krawędzi e
-    e->weight = e->V0()->Number() + e->V1()->Number();
-    std::cout<<e->weight<<std::endl;
+    // Dla kolejnych krawędzi grafu powtórz ostatnie 7 kroków(e = SelectEdge(2, 3),…)
 }

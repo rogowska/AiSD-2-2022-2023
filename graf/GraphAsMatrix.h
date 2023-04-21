@@ -73,8 +73,8 @@ public:
         numberOfVertices = n;
         for (int i = 0; i < n; i++)
         {
-            Vertex v(i);
-            vertices.push_back(&v);
+            Vertex *v = new Vertex(i+1);
+            vertices.push_back(v);
         }
         createAdjacencyMatrix(n);
     }
@@ -97,10 +97,10 @@ public:
     bool IsEdge(int u, int v)
     {
         bool ifEdgeExists = false;
-        if (u && v < numberOfVertices)
+        if (u && v > numberOfVertices)
         {
         }
-        else if (adjacencyMatrix[u][v] != NULL)
+        else if (adjacencyMatrix[u-1][v-1] != NULL)
         {
             ifEdgeExists = true;
         }
@@ -121,20 +121,24 @@ public:
     {
         if (!IsEdge(u, v))
         {
-            Edge newEdge = Edge(vertices[u], vertices[v]);
-            adjacencyMatrix[u][v] = &newEdge;
+            Edge *edge = new Edge(vertices[u-1], vertices[v-1]);
+            adjacencyMatrix[u-1][v-1] = edge;
+            numberOfEdges++;
+            if(!isDirected){
+                adjacencyMatrix[v-1][u-1] = edge;
+            }
         }
     }
 
     Edge *SelectEdge(int u, int v)
     {
         if (IsEdge(u, v))
-            return adjacencyMatrix[u][v];
+            return adjacencyMatrix[u-1][v-1];
     }
 
     Vertex *SelectVertex(int v)
     {
-        return vertices[v];
+        return vertices[v-1];
     }
 
     /*Iterator<Vertex> &VerticesIter();

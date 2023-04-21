@@ -1,3 +1,4 @@
+#pragma once
 #include "Vertex.h"
 
 class Edge
@@ -20,8 +21,9 @@ public:
     {
         if (v == v0)
             return v1;
-        if (v == v1)
+        else if (v == v1)
             return v0;
+        else
         return nullptr;
     }
 };
