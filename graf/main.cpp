@@ -3,8 +3,20 @@
 
 int main()
 {
-    // Utwórz graf skierowany złożony z 10 wierzchołków
-    GraphAsMatrix graph(20, true);
+    test(true);
+    test(false);
+
+    //Dla kolejnych krawędzi grafu powtórz ostatnie 7 kroków(e = SelectEdge(2, 3),…)
+}
+
+void test(bool IsDirected){
+    if(IsDirected)
+        std::cout<<"Test for directed graph"<<std::endl;
+    else
+        std::cout<<"Test for undirected graph"<<std::endl;
+
+    // Utwórz graf złożony z 10 wierzchołków
+    GraphAsMatrix graph(10, IsDirected);
 
     // Wypisz, ile jest wierzchołków
     std::cout << "Number of vertices: " << graph.NumberOfVertices() << std::endl;
@@ -41,7 +53,21 @@ int main()
     std::cout << "If edge (1,2) exists: " << graph.IsEdge(1, 2) << std::endl;
     std::cout << "If edge (2,1) exists: " << graph.IsEdge(2, 1) << std::endl;
 
-    Edge *e = graph.SelectEdge(1, 2);
+    EdgeTest(graph, 1, 2);
+    EdgeTest(graph, 2, 3);
+    EdgeTest(graph, 3, 4);
+    EdgeTest(graph, 4, 5);
+    EdgeTest(graph, 5, 6);
+    EdgeTest(graph, 6, 7);
+    EdgeTest(graph, 7, 8);
+    EdgeTest(graph, 8, 9);
+    EdgeTest(graph, 9, 10);
+}
+
+void EdgeTest(GraphAsMatrix graph, int u, int v){
+    std::cout<<"Test for edge ("<<u<<","<<v<<")"<<std::endl;
+
+    Edge *e = graph.SelectEdge(u, v);
             
     //Wypisz V0 dla e
     //Wypisz V1 dla e
@@ -56,7 +82,5 @@ int main()
     //Nadaj krawędzi e wagę V0 + V1
     //Wypisz wagę krawędzi e
     e->weight = e->V0()->Number() + e->V1()->Number();
-
-    //Dla kolejnych krawędzi grafu powtórz ostatnie 7 kroków(e = SelectEdge(2, 3),…)
-                    Testy proszę powtórzyć tworząc graf nieskierowany
+    std::cout<<e->weight<<std::endl;
 }
