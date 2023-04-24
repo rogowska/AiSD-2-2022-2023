@@ -17,11 +17,26 @@ class GraphAsMatrix
         int current;
 
     public:
-        AllVerticesIter(GraphAsMatrix &owner);
-        bool IsDone();
-        Vertex &operator*();
-        void operator++();
+        AllVerticesIter(GraphAsMatrix &owner)
+        {
+            current = 0;
+            //?? kopia ownera this->owner = owner;
+        };
+        bool IsDone()
+        {
+            if (current >= owner.vertices.size())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        Vertex &operator*() { return *owner.vertices[current]; }
+        void operator++() { current++; }
     };
+
     class AllEdgesIter : public Iterator<Edge>
     {
         GraphAsMatrix &owner;
@@ -35,6 +50,7 @@ class GraphAsMatrix
         Edge &operator*();
         void operator++() { next(); }
     };
+
     class EmanEdgesIter : public Iterator<Edge>
     {
         GraphAsMatrix &owner;
@@ -48,6 +64,7 @@ class GraphAsMatrix
         Edge &operator*();
         void operator++() { next(); }
     };
+
     class InciEdgesIter : public Iterator<Edge>
     {
         GraphAsMatrix &owner;
