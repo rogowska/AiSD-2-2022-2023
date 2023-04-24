@@ -1,6 +1,7 @@
 #include <vector>
 #include "Vertex.h"
 #include "Edge.h"
+#include "Iterator.h"
 
 class GraphAsMatrix
 {
@@ -10,53 +11,56 @@ class GraphAsMatrix
     int numberOfVertices;
     int numberOfEdges = 0;
 
-    /* class AllVerticesIter: public Iterator<Vertex>
-     {
-     GraphAsMatrix & owner;
-     int current;
-     public:
-     AllVerticesIter(GraphAsMatrix &owner)
-     bool IsDone();
-     Vertex & operator*();
-     void operator++();
+    class AllVerticesIter : public Iterator<Vertex>
+    {
+        GraphAsMatrix &owner;
+        int current;
+
+    public:
+        AllVerticesIter(GraphAsMatrix &owner);
+        bool IsDone();
+        Vertex &operator*();
+        void operator++();
     };
-     class AllEdgesIter: public Iterator<Edge>
-     {
-     GraphAsMatrix & owner;
-     int row;
-     int col;
-     public:
-     void next()
-     AllEdgesIter(GraphAsMatrix &owner);
-     bool IsDone();
-     Edge & operator*();
-     void operator++(){next();}
-     };
-    class EmanEdgesIter: public Iterator<Edge>
-     {
-     GraphAsMatrix & owner;
-     int row;
-     int col;
-     public:
-     void next()
-     EmanEdgesIter(GraphAsMatrix &owner,int v);
-     bool IsDone();
-     Edge & operator*();
-     void operator++(){next();}
+    class AllEdgesIter : public Iterator<Edge>
+    {
+        GraphAsMatrix &owner;
+        int row;
+        int col;
+
+    public:
+        void next();
+        AllEdgesIter(GraphAsMatrix &owner);
+        bool IsDone();
+        Edge &operator*();
+        void operator++() { next(); }
     };
-    class InciEdgesIter: public Iterator<Edge>
-     {
-     GraphAsMatrix & owner;
-     int row;
-     int col;
-     public:
-    2
-     void next()
-     InciEdgesIter(GraphAsMatrix &owner,int v);
-     bool IsDone();
-     Edge & operator*();
-     void operator++(){next();}
-    };*/
+    class EmanEdgesIter : public Iterator<Edge>
+    {
+        GraphAsMatrix &owner;
+        int row;
+        int col;
+
+    public:
+        void next();
+        EmanEdgesIter(GraphAsMatrix &owner, int v);
+        bool IsDone();
+        Edge &operator*();
+        void operator++() { next(); }
+    };
+    class InciEdgesIter : public Iterator<Edge>
+    {
+        GraphAsMatrix &owner;
+        int row;
+        int col;
+
+    public:
+        void next();
+        InciEdgesIter(GraphAsMatrix &owner, int v);
+        bool IsDone();
+        Edge &operator*();
+        void operator++() { next(); }
+    };
 
 public:
     void createAdjacencyMatrix(int n)
@@ -73,7 +77,7 @@ public:
         numberOfVertices = n;
         for (int i = 0; i < n; i++)
         {
-            Vertex *v = new Vertex(i+1);
+            Vertex *v = new Vertex(i + 1);
             vertices.push_back(v);
         }
         createAdjacencyMatrix(n);
@@ -100,7 +104,7 @@ public:
         if (u && v > numberOfVertices)
         {
         }
-        else if (adjacencyMatrix[u-1][v-1] != NULL)
+        else if (adjacencyMatrix[u - 1][v - 1] != NULL)
         {
             ifEdgeExists = true;
         }
@@ -121,11 +125,12 @@ public:
     {
         if (!IsEdge(u, v))
         {
-            Edge *edge = new Edge(vertices[u-1], vertices[v-1]);
-            adjacencyMatrix[u-1][v-1] = edge;
+            Edge *edge = new Edge(vertices[u - 1], vertices[v - 1]);
+            adjacencyMatrix[u - 1][v - 1] = edge;
             numberOfEdges++;
-            if(!isDirected){
-                adjacencyMatrix[v-1][u-1] = edge;
+            if (!isDirected)
+            {
+                adjacencyMatrix[v - 1][u - 1] = edge;
             }
         }
     }
@@ -133,12 +138,12 @@ public:
     Edge *SelectEdge(int u, int v)
     {
         if (IsEdge(u, v))
-            return adjacencyMatrix[u-1][v-1];
+            return adjacencyMatrix[u - 1][v - 1];
     }
 
     Vertex *SelectVertex(int v)
     {
-        return vertices[v-1];
+        return vertices[v - 1];
     }
 
     /*Iterator<Vertex> &VerticesIter();
