@@ -17,10 +17,10 @@ class GraphAsMatrix
         int current;
 
     public:
-        AllVerticesIter(GraphAsMatrix &owner)
+        AllVerticesIter(GraphAsMatrix &owner) : owner(owner)
         {
             current = 0;
-            //?? kopia ownera this->owner = owner;
+            this->owner = owner;
         };
         bool IsDone()
         {
@@ -63,11 +63,11 @@ class GraphAsMatrix
                 }
             }
         }
-        AllEdgesIter(GraphAsMatrix &owner)
+        AllEdgesIter(GraphAsMatrix &owner) : owner(owner)
         {
+            this->owner = owner;
             row = 0;
             col = -1;
-            // kopia ownera this.owner->owner ???
         }
         bool IsDone()
         {
