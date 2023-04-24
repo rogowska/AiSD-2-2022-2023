@@ -93,7 +93,12 @@ class GraphAsMatrix
 
     public:
         void next();
-        EmanEdgesIter(GraphAsMatrix &owner, int v);
+        EmanEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
+        {
+            row = v;
+            col = 0;
+            this->owner = owner;
+        }
         bool IsDone();
         Edge &operator*();
         void operator++() { next(); }
@@ -107,7 +112,12 @@ class GraphAsMatrix
 
     public:
         void next();
-        InciEdgesIter(GraphAsMatrix &owner, int v);
+        InciEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
+        {
+            row = 0;
+            col = v;
+            this->owner = owner;
+        }
         bool IsDone();
         Edge &operator*();
         void operator++() { next(); }
