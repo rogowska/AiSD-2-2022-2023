@@ -44,10 +44,44 @@ class GraphAsMatrix
         int col;
 
     public:
-        void next();
-        AllEdgesIter(GraphAsMatrix &owner);
-        bool IsDone();
-        Edge &operator*();
+        void next()
+        {
+            int width = owner.adjacencyMatrix.size();
+            col++;
+            if (col >= width)
+            {
+                row++;
+                col = 0;
+            }
+            while (owner.adjacencyMatrix[col][row] == NULL)
+            {
+                col++;
+                if (col >= width)
+                {
+                    row++;
+                    col = 0;
+                }
+            }
+        }
+        AllEdgesIter(GraphAsMatrix &owner)
+        {
+            row = 0;
+            col = -1;
+            // kopia ownera this.owner->owner ???
+        }
+        bool IsDone()
+        {
+            int width = owner.adjacencyMatrix.size();
+            if (col >= width && row >= owner.adjacencyMatrix[width].size())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        Edge &operator*() { return *owner.adjacencyMatrix[col][row]; }
         void operator++() { next(); }
     };
 
