@@ -112,18 +112,18 @@ void test(bool IsDirected)
     for (emIter; !emIter.IsDone(); ++emIter)
     {
         Edge e = *emIter;
-        std::cout << "Edge V0: " << e.V0()->Number() << "Edge V1: " << e.V1()->Number() << std::endl;
+        std::cout << "Edge V0: " << e.V0()->Number() << " Edge V1: " << e.V1()->Number() << std::endl;
     }
     std::cout << std::endl;
 
     // Wypisz wszystkie krawędzie dochodzące do wierzchołka o numerze 2, korzystając z odpowiedniego iteratora
     //( to znaczy, wypisz pierwszy i drugi wierzchołek krawędzi – v0 i v1)
-    std::cout<<"InciIterator test"<<std::endl;
+    std::cout<<"InciIterator test:"<<std::endl;
     Iterator<Edge> &inIter = graph.IncidentEdgesIter(2);
     for (inIter; !inIter.IsDone(); ++inIter)
     {
         Edge e = *inIter;
-        std::cout << "Edge V0: " << e.V0()->Number() << "Edge V1: " << e.V1()->Number() << std::endl;
+        std::cout << "Edge V0: " << e.V0()->Number() << " Edge V1: " << e.V1()->Number() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -132,6 +132,4 @@ int main()
 {
     test(true);
     test(false);
-
-    // Dla kolejnych krawędzi grafu powtórz ostatnie 7 kroków(e = SelectEdge(2, 3),…)
 }

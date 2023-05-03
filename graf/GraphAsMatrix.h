@@ -84,10 +84,12 @@ class GraphAsMatrix
                 return false;
             }
         }
-        Edge &operator*() { 
-            if(col < 0)
+        Edge &operator*()
+        {
+            if (col < 0)
                 next();
-            return *owner.adjacencyMatrix[col][row]; }
+            return *owner.adjacencyMatrix[col][row];
+        }
         void operator++() { next(); }
     };
 
@@ -100,31 +102,34 @@ class GraphAsMatrix
     public:
         void next()
         {
-            if (!this->IsDone())
                 col++;
-            while (owner.adjacencyMatrix[col][0] == NULL && !this->IsDone())
+            while (owner.adjacencyMatrix[col][row] == NULL && !this->IsDone())
             {
                 col++;
             }
         }
         EmanEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
         {
-            row = v;
-            col = 0;
+            row = v - 1;
+            col = -1;
             this->owner = owner;
         }
         bool IsDone()
         {
-            if (col >= owner.adjacencyMatrix.size() - 1)
-            {
+            int value = owner.adjacencyMatrix.size();
+            if (col >= (value - 1))
                 return true;
-            }
             else
             {
                 return false;
             }
         }
-        Edge &operator*() { return *owner.adjacencyMatrix[col][row]; }
+        Edge &operator*()
+        {
+            if (col < 0)
+                next();
+            return *owner.adjacencyMatrix[col][row];
+        }
         void operator++() { next(); }
     };
 
@@ -137,22 +142,22 @@ class GraphAsMatrix
     public:
         void next()
         {
-            if (!this->IsDone())
                 row++;
-            while (owner.adjacencyMatrix[0][row] == NULL && !this->IsDone())
+            while (owner.adjacencyMatrix[col][row] == NULL && !this->IsDone())
             {
                 row++;
             }
         }
         InciEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
         {
-            row = 0;
-            col = v;
+            row = -1;
+            col = v - 1;
             this->owner = owner;
         }
         bool IsDone()
         {
-            if (row >= owner.adjacencyMatrix[0].size() - 1)
+            int value = owner.adjacencyMatrix[0].size();
+            if (row >= (value - 1))
             {
                 return true;
             }
@@ -161,7 +166,12 @@ class GraphAsMatrix
                 return false;
             }
         }
-        Edge &operator*() { return *owner.adjacencyMatrix[col][row]; }
+        Edge &operator*()
+        {
+            if (row < 0)
+                next();
+            return *owner.adjacencyMatrix[col][row];
+        }
         void operator++() { next(); }
     };
 
