@@ -1,4 +1,7 @@
 #include "GraphAsMatrix.h"
+#include "Iterator.h"
+#include "Vertex.h"
+#include "Edge.h"
 #include <iostream>
 
 void EdgeTest(GraphAsMatrix graph, int u, int v)
@@ -20,15 +23,18 @@ void EdgeTest(GraphAsMatrix graph, int u, int v)
     // Nadaj krawędzi e wagę V0 + V1
     // Wypisz wagę krawędzi e
     e->weight = e->V0()->Number() + e->V1()->Number();
-    std::cout <<"Weight of edge: "<< e->weight << std::endl<<std::endl;
+    std::cout << "Weight of edge: " << e->weight << std::endl
+              << std::endl;
 }
 
 void test(bool IsDirected)
 {
     if (IsDirected)
-        std::cout << "Test for directed graph" << std::endl<<std::endl;
+        std::cout << "Test for directed graph" << std::endl
+                  << std::endl;
     else
-        std::cout << "Test for undirected graph" << std::endl<<std::endl;
+        std::cout << "Test for undirected graph" << std::endl
+                  << std::endl;
 
     // Utwórz graf złożony z 10 wierzchołków
     GraphAsMatrix graph(10, IsDirected);
@@ -66,12 +72,25 @@ void test(bool IsDirected)
     // Wypisz, czy istnieje krawędź (2,1)
     std::cout << "If edge (1,1) exists: " << graph.IsEdge(1, 1) << std::endl;
     std::cout << "If edge (1,2) exists: " << graph.IsEdge(1, 2) << std::endl;
-    std::cout << "If edge (2,1) exists: " << graph.IsEdge(2, 1) << std::endl<<std::endl;
+    std::cout << "If edge (2,1) exists: " << graph.IsEdge(2, 1) << std::endl
+              << std::endl;
 
     EdgeTest(graph, 1, 2);
     EdgeTest(graph, 2, 3);
     EdgeTest(graph, 3, 4);
     EdgeTest(graph, 9, 9);
+
+    // Wypisz wszystkie wierzchołki korzystając z iteratora po wierzchołkach (ich unikalny numer i wagę)
+    Iterator<Vertex> &vIter = graph.VerticesIter();
+    for (vIter; !vIter.IsDone(); ++vIter)
+    {
+        Vertex e = *vIter;
+        std::cout << "Vertex number: " << e.Number() << " Vertex weight: " << e.weight << std::endl;
+    }
+    
+    graph.AddEdge(3, 5);
+    graph.AddEdge(8, 3);
+    graph.AddEdge(5, 2);
 }
 
 int main()
