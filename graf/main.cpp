@@ -81,16 +81,51 @@ void test(bool IsDirected)
     EdgeTest(graph, 9, 9);
 
     // Wypisz wszystkie wierzchołki korzystając z iteratora po wierzchołkach (ich unikalny numer i wagę)
+    std::cout<<"Vertex iterator test: "<<std::endl;
     Iterator<Vertex> &vIter = graph.VerticesIter();
     for (vIter; !vIter.IsDone(); ++vIter)
     {
         Vertex e = *vIter;
         std::cout << "Vertex number: " << e.Number() << " Vertex weight: " << e.weight << std::endl;
     }
-    
+    std::cout << std::endl;
+
     graph.AddEdge(3, 5);
     graph.AddEdge(8, 3);
     graph.AddEdge(5, 2);
+
+    // Wypisz wszystkie krawędzie korzystając z odpowiedniego iteratora
+    // to znaczy, wypisz pierwszy i drugi wierzchołek krawędzi – v0 i v1)
+    std::cout<<"Edge iterator test: "<<std::endl;
+    Iterator<Edge> &eIter = graph.EdgesIter();
+    for (eIter; !eIter.IsDone(); ++eIter)
+    {
+        Edge e = *eIter;
+        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Wypisz wszystkie krawędzie wychodzące z wierzchołka o numerze 3
+    // korzystając z odpowiedniego iteratora (to znaczy, wypisz pierwszy i drugi wierzchołek krawędzi – v0 i v1)
+    std::cout<<"EmanIterator test: "<<std::endl;
+    Iterator<Edge> &emIter = graph.EmanatingEdgesIter(3);
+    for (emIter; !emIter.IsDone(); ++emIter)
+    {
+        Edge e = *emIter;
+        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Wypisz wszystkie krawędzie dochodzące do wierzchołka o numerze 2, korzystając z odpowiedniego iteratora
+    //( to znaczy, wypisz pierwszy i drugi wierzchołek krawędzi – v0 i v1)
+    std::cout<<"InciIterator test"<<std::endl;
+    Iterator<Edge> &inIter = graph.IncidentEdgesIter(2);
+    for (inIter; !inIter.IsDone(); ++inIter)
+    {
+        Edge e = *inIter;
+        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 int main()
