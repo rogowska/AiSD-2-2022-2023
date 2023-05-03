@@ -101,7 +101,7 @@ void test(bool IsDirected)
     for (eIter; !eIter.IsDone(); ++eIter)
     {
         Edge e = *eIter;
-        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+        std::cout << "Edge V0: " << e.V0()->Number() << " Edge V1: " << e.V1()->Number() << std::endl;
     }
     std::cout << std::endl;
 
@@ -112,7 +112,7 @@ void test(bool IsDirected)
     for (emIter; !emIter.IsDone(); ++emIter)
     {
         Edge e = *emIter;
-        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+        std::cout << "Edge V0: " << e.V0()->Number() << "Edge V1: " << e.V1()->Number() << std::endl;
     }
     std::cout << std::endl;
 
@@ -123,7 +123,7 @@ void test(bool IsDirected)
     for (inIter; !inIter.IsDone(); ++inIter)
     {
         Edge e = *inIter;
-        std::cout << "Edge V0: " << e.V0() << "Edge V1: " << e.V1() << std::endl;
+        std::cout << "Edge V0: " << e.V0()->Number() << "Edge V1: " << e.V1()->Number() << std::endl;
     }
     std::cout << std::endl;
 }

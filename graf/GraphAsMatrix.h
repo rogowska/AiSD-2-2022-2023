@@ -75,7 +75,7 @@ class GraphAsMatrix
         bool IsDone()
         {
             int width = owner.adjacencyMatrix.size();
-            if (col >= width && row >= owner.adjacencyMatrix[width].size())
+            if (col >= width - 1 && row >= owner.adjacencyMatrix[width - 1].size() - 1)
             {
                 return true;
             }
@@ -84,7 +84,10 @@ class GraphAsMatrix
                 return false;
             }
         }
-        Edge &operator*() { return *owner.adjacencyMatrix[col][row]; }
+        Edge &operator*() { 
+            if(col < 0)
+                next();
+            return *owner.adjacencyMatrix[col][row]; }
         void operator++() { next(); }
     };
 
@@ -112,7 +115,7 @@ class GraphAsMatrix
         }
         bool IsDone()
         {
-            if (col >= owner.adjacencyMatrix.size())
+            if (col >= owner.adjacencyMatrix.size() - 1)
             {
                 return true;
             }
@@ -149,7 +152,7 @@ class GraphAsMatrix
         }
         bool IsDone()
         {
-            if (row >= owner.adjacencyMatrix[0].size())
+            if (row >= owner.adjacencyMatrix[0].size() - 1)
             {
                 return true;
             }
