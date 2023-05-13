@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 #include "Vertex.h"
 #include "Edge.h"
 #include "Iterator.h"
@@ -111,7 +112,7 @@ class GraphAsMatrix
         }
         EmanEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
         {
-            row = v - 1;
+            row = v;
             col = -1;
             this->owner = owner;
         }
@@ -152,7 +153,7 @@ class GraphAsMatrix
         InciEdgesIter(GraphAsMatrix &owner, int v) : owner(owner)
         {
             row = -1;
-            col = v - 1;
+            col = v;
             this->owner = owner;
         }
         bool IsDone()
@@ -192,6 +193,7 @@ public:
                 DFS_visitor(visitor, &x, visited);
             }
         }
+        std::cout<< "Number of vertices counted: " << visitor->GetNumber()<< std::endl;
     }
 
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
@@ -223,7 +225,7 @@ public:
         numberOfVertices = n;
         for (int i = 0; i < n; i++)
         {
-            Vertex *v = new Vertex(i + 1);
+            Vertex *v = new Vertex(i);
             vertices.push_back(v);
         }
         createAdjacencyMatrix(n);
@@ -250,7 +252,7 @@ public:
         if (u && v > numberOfVertices)
         {
         }
-        else if (adjacencyMatrix[u - 1][v - 1] != NULL)
+        else if (adjacencyMatrix[u][v] != NULL)
         {
             ifEdgeExists = true;
         }
@@ -271,12 +273,12 @@ public:
     {
         if (!IsEdge(u, v))
         {
-            Edge *edge = new Edge(vertices[u - 1], vertices[v - 1]);
-            adjacencyMatrix[u - 1][v - 1] = edge;
+            Edge *edge = new Edge(vertices[u], vertices[v]);
+            adjacencyMatrix[u][v] = edge;
             numberOfEdges++;
             if (!isDirected)
             {
-                adjacencyMatrix[v - 1][u - 1] = edge;
+                adjacencyMatrix[v][u] = edge;
             }
         }
     }
@@ -284,12 +286,12 @@ public:
     Edge *SelectEdge(int u, int v)
     {
         if (IsEdge(u, v))
-            return adjacencyMatrix[u - 1][v - 1];
+            return adjacencyMatrix[u][v];
     }
 
     Vertex *SelectVertex(int v)
     {
-        return vertices[v - 1];
+        return vertices[v];
     }
 
     Iterator<Vertex> &VerticesIter()

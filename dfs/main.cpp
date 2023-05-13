@@ -130,37 +130,37 @@ void test(bool IsDirected)
     // DFS grafu nieskierowanego
     if (!IsDirected)
     {
-        GraphAsMatrix *graph = new GraphAsMatrix(10, false);
-        graph->AddEdge(0, 1);
-        graph->AddEdge(1, 2);
-        graph->AddEdge(2, 3);
-        graph->AddEdge(3, 4);
-        graph->AddEdge(3, 7);
-        graph->AddEdge(4, 5);
-        graph->AddEdge(5, 9);
-        graph->AddEdge(9, 9);
-        graph->AddEdge(6, 8);
-        graph->AddEdge(8, 6);
-        graph->AddEdge(0, 8);
-        graph->DFS(graph->SelectVertex(0));
+        GraphAsMatrix *graph2 = new GraphAsMatrix(10, false);
+        graph2->AddEdge(0, 1);
+        graph2->AddEdge(1, 2);
+        graph2->AddEdge(2, 3);
+        graph2->AddEdge(3, 4);
+        graph2->AddEdge(3, 7);
+        graph2->AddEdge(4, 5);
+        graph2->AddEdge(5, 9);
+        graph2->AddEdge(9, 9);
+        graph2->AddEdge(6, 8);
+        graph2->AddEdge(8, 6);
+        graph2->AddEdge(0, 8);
+        graph2->DFS(graph2->SelectVertex(0));
     }
 
     //dfs grafu nieskierowanego
     if (IsDirected)
     {
-        GraphAsMatrix *graph = new GraphAsMatrix(10, true);
-        graph->AddEdge(0, 1);
-        graph->AddEdge(1, 2);
-        graph->AddEdge(2, 3);
-        graph->AddEdge(3, 4);
-        graph->AddEdge(3, 7);
-        graph->AddEdge(4, 5);
-        graph->AddEdge(5, 9);
-        graph->AddEdge(9, 9);
-        graph->AddEdge(6, 8);
-        graph->AddEdge(8, 6);
-        graph->AddEdge(0, 8);
-        graph->DFS(graph->SelectVertex(0));
+        GraphAsMatrix *graph2 = new GraphAsMatrix(10, true);
+        graph2->AddEdge(0, 1);
+        graph2->AddEdge(1, 2);
+        graph2->AddEdge(2, 3);
+        graph2->AddEdge(3, 4);
+        graph2->AddEdge(3, 7);
+        graph2->AddEdge(4, 5);
+        graph2->AddEdge(5, 9);
+        graph2->AddEdge(9, 9);
+        graph2->AddEdge(6, 8);
+        graph2->AddEdge(8, 6);
+        graph2->AddEdge(0, 8);
+        graph2->DFS(graph2->SelectVertex(0));
     }
 }
 
