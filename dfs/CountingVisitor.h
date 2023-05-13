@@ -17,7 +17,7 @@ public:
 
 void CountingVisitor::Visit(Vertex &element)
 {
-    number = number + 1;
+    number++;
 }
 
 int CountingVisitor::GetNumber(){
