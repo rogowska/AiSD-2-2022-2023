@@ -8,7 +8,7 @@
 class GraphAsMatrix
 {
     std::vector<Vertex *> vertices;
-    std::vector<std::vector<Edge *>> adjacencyMatrix;
+    std::vector<std::vector<Edge *> > adjacencyMatrix;
     bool isDirected;
     int numberOfVertices;
     int numberOfEdges = 0;
@@ -187,13 +187,16 @@ public:
         while (!iter.IsDone())
         {
             ++iter;
-            Vertex x = *iter;
-            if (visited[x.Number()] == false)
+            Vertex *x = &(*iter);
+            if (!iter.IsDone())
             {
-                DFS_visitor(visitor, &x, visited);
+                if (visited[x->Number()] == false)
+                {
+                    DFS_visitor(visitor, &(*iter), visited);
+                }
             }
         }
-        std::cout<< "Number of vertices counted: " << visitor->GetNumber()<< std::endl;
+        std::cout << "Number of vertices counted: " << visitor->GetNumber() << std::endl;
     }
 
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
@@ -204,10 +207,13 @@ public:
         while (!emanIter.IsDone())
         {
             ++emanIter;
-            Edge vEdge = *emanIter;
-            Vertex *u = vEdge.Mate(v);
-            if (visited[u->Number()] == false)
-                DFS_visitor(visitor, u, visited);
+            if (!emanIter.IsDone())
+            {
+                Edge vEdge = *emanIter;
+                Vertex *u = vEdge.Mate(v);
+                if (visited[u->Number()] == false)
+                    DFS_visitor(visitor, u, visited);
+            }
         }
     }
 
