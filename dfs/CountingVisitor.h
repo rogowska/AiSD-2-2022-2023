@@ -3,7 +3,7 @@
 
 #include "Visitor.h"
 
-class CountingVisitor : public virtual Visitor<int>
+class CountingVisitor : public virtual Visitor<Vertex>
 {
     int number;
 

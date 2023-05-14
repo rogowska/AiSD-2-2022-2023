@@ -180,9 +180,9 @@ class GraphAsMatrix
 public:
     void DFS(Vertex *v)
     {
-        CountingVisitor *visitor;
+        CountingVisitor visitor;
         std::vector<bool> visited(vertices.size(), false);
-        DFS_visitor(visitor, v, visited);
+        DFS_visitor(&visitor, v, visited);
         AllVerticesIter iter(*this);
         while (!iter.IsDone())
         {
@@ -192,11 +192,11 @@ public:
             {
                 if (visited[x->Number()] == false)
                 {
-                    DFS_visitor(visitor, &(*iter), visited);
+                    DFS_visitor(&visitor, &(*iter), visited);
                 }
             }
         }
-        std::cout << "Number of vertices counted: " << visitor->GetNumber() << std::endl;
+        std::cout << "Number of vertices counted: " << visitor.GetNumber() << std::endl;
     }
 
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
