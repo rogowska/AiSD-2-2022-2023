@@ -165,9 +165,9 @@ void test(bool IsDirected)
         graph2->DFS(graph2->SelectVertex(0));
         graph2->AddEdge(6, 0);
         graph2->AddEdge(8, 0);
-        std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
+        //std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
         graph2->AddEdge(7, 0);
-        std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
+        //std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
     }
 }
 

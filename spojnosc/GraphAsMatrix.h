@@ -186,19 +186,9 @@ public:
             CountingVisitor visitor;
             std::vector<bool> visited(vertices.size(), false);
             DFS_visitor(&visitor, v, visited);
-            AllVerticesIter iter(*this);
-            while (!iter.IsDone())
-            {
-                ++iter;
-                Vertex *x = &(*iter);
-                if (!iter.IsDone())
-                {
-                    if (visited[x->Number()] == false)
-                    {
-                        DFS_visitor(&visitor, &(*iter), visited);
-                    }
-                }
-            }
+            std::cout<<std::endl;
+            std::cout<<"visitor counter "<<visitor.GetNumber()<<std::endl;
+            std::cout<<"vertices size " << vertices.size()<<std::endl;
             return (visitor.GetNumber() == vertices.size());
         }
         if (IsDirected())
