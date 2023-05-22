@@ -186,9 +186,9 @@ public:
             CountingVisitor visitor;
             std::vector<bool> visited(vertices.size(), false);
             DFS_visitor(&visitor, v, visited);
-            std::cout<<std::endl;
-            std::cout<<"visitor counter "<<visitor.GetNumber()<<std::endl;
-            std::cout<<"vertices size " << vertices.size()<<std::endl;
+            std::cout << std::endl;
+            std::cout << "visitor counter " << visitor.GetNumber() << std::endl;
+            std::cout << "vertices size " << vertices.size() << std::endl;
             return (visitor.GetNumber() == vertices.size());
         }
         if (IsDirected())
@@ -201,20 +201,8 @@ public:
                 CountingVisitor visitor;
                 std::vector<bool> visited(vertices.size(), false);
                 DFS_visitor(&visitor, v, visited);
-                AllVerticesIter iter(*this);
-                while (!iter.IsDone())
+                if (visitor.GetNumber() < min)
                 {
-                    ++iter;
-                    Vertex *x = &(*iter);
-                    if (!iter.IsDone())
-                    {
-                        if (visited[x->Number()] == false)
-                        {
-                            DFS_visitor(&visitor, &(*iter), visited);
-                        }
-                    }
-                }
-                if(visitor.GetNumber() < min){
                     return false;
                 }
             }
@@ -245,18 +233,22 @@ public:
 
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
     {
+        int row = v->Number();
+        int last_col = adjacencyMatrix.size()-1;
         visitor->Visit(*v);
         visited[v->Number()] = true;
-        EmanEdgesIter emanIter(*this, v->Number());
+        EmanEdgesIter emanIter(*this, row);
         while (!emanIter.IsDone())
         {
             ++emanIter;
-            if (!emanIter.IsDone())
+            if (!emanIter.IsDone() || (emanIter.IsDone() && adjacencyMatrix[last_col][row] != nullptr))
             {
                 Edge vEdge = *emanIter;
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
+                {
                     DFS_visitor(visitor, u, visited);
+                }
             }
         }
     }

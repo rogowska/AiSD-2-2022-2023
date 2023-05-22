@@ -145,9 +145,10 @@ void test(bool IsDirected)
         graph2->AddEdge(0, 8);
         graph2->DFS(graph2->SelectVertex(0));
         std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
+
     }
 
-    // dfs grafu nieskierowanego
+    // dfs grafu skierowanego
     if (IsDirected)
     {
         GraphAsMatrix *graph2 = new GraphAsMatrix(10, true);
@@ -164,15 +165,15 @@ void test(bool IsDirected)
         graph2->AddEdge(0, 8);
         graph2->DFS(graph2->SelectVertex(0));
         graph2->AddEdge(6, 0);
-        graph2->AddEdge(8, 0);
-        //std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
+        graph2->AddEdge(9, 0);
+        std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
         graph2->AddEdge(7, 0);
-        //std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
+        std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
     }
 }
 
 int main()
 {
     test(true);
-    test(false);
+    //test(false);
 }
