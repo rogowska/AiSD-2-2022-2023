@@ -178,6 +178,39 @@ class GraphAsMatrix
     };
 
 public:
+    void DFS_Spanning_Tree(Vertex *v)
+    {
+        if (IsConnected)
+        {
+            std::vector<bool> visited(vertices.size(), false);
+            std::vector<int> parent(vertices.size(), -1);
+            DFS_Spanning_Tree_1(v, visited, parent);
+        }
+    }
+
+    void DFS_Spanning_Tree_1(Vertex *v, std::vector<bool> &visited, std::vector<int> &parent)
+    {
+        int row = v->Number();
+        int last_col = adjacencyMatrix.size() - 1;
+        visited[v->Number()] = true;
+        EmanEdgesIter emanIter(*this, row);
+        while (!emanIter.IsDone())
+        {
+            ++emanIter;
+            if (!emanIter.IsDone() || (emanIter.IsDone() && adjacencyMatrix[last_col][row] != nullptr))
+            {
+                Edge vEdge = *emanIter;
+                Vertex *u = vEdge.Mate(v);
+                if (visited[u->Number()] == false)
+                {
+                    parent[u->Number()] = v->Number();
+                    std::cout<<parent[u->Number()]<<std::endl;
+                    DFS_Spanning_Tree_1(u, visited, parent);
+                }
+            }
+        }
+    }
+
     bool IsConnected()
     {
         if (!IsDirected())
@@ -234,7 +267,7 @@ public:
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
     {
         int row = v->Number();
-        int last_col = adjacencyMatrix.size()-1;
+        int last_col = adjacencyMatrix.size() - 1;
         visitor->Visit(*v);
         visited[v->Number()] = true;
         EmanEdgesIter emanIter(*this, row);
