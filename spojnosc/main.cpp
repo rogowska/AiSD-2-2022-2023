@@ -175,5 +175,5 @@ void test(bool IsDirected)
 int main()
 {
     test(true);
-    //test(false);
+    test(false);
 }
