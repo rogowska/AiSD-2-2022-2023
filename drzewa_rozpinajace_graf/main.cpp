@@ -141,11 +141,11 @@ void test(bool IsDirected)
         graph2->AddEdge(9, 9);
         graph2->AddEdge(6, 8);
         graph2->AddEdge(8, 6);
+        // spojnosc testy
         std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
         graph2->AddEdge(0, 8);
         graph2->DFS(graph2->SelectVertex(0));
         std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
-
     }
 
     // dfs grafu skierowanego
@@ -166,14 +166,33 @@ void test(bool IsDirected)
         graph2->DFS(graph2->SelectVertex(0));
         graph2->AddEdge(6, 0);
         graph2->AddEdge(9, 0);
+        // spojnosc testy
         std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
         graph2->AddEdge(7, 0);
         std::cout << "graf jest spojny=" << graph2->IsConnected() << std::endl;
     }
+
+    GraphAsMatrix *graph3 = new GraphAsMatrix(10, false);
+    graph3->AddEdge(0, 1);
+    graph3->AddEdge(1, 2);
+    graph3->AddEdge(2, 3);
+    graph3->AddEdge(3, 4);
+    graph3->AddEdge(3, 7);
+    graph3->AddEdge(4, 5);
+    graph3->AddEdge(5, 9);
+    graph3->AddEdge(9, 9);
+    graph3->AddEdge(6, 8);
+    graph3->AddEdge(8, 6);
+    graph3->AddEdge(0, 8);
+    graph3->DFS_Spanning_Tree(graph3->SelectVertex(0));
+    graph3->AddEdge(3, 9);
+    graph3->AddEdge(5, 7);
+    graph3->AddEdge(9, 8);
+    graph3->DFS_Spanning_Tree(graph.SelectVertex(0));
 }
 
 int main()
 {
     test(true);
-    //test(false);
+    test(false);
 }

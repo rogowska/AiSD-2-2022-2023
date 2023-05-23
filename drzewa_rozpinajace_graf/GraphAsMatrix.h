@@ -180,7 +180,7 @@ class GraphAsMatrix
 public:
     void DFS_Spanning_Tree(Vertex *v)
     {
-        if (IsConnected)
+        if (IsConnected())
         {
             std::vector<bool> visited(vertices.size(), false);
             std::vector<int> parent(vertices.size(), -1);
@@ -219,9 +219,6 @@ public:
             CountingVisitor visitor;
             std::vector<bool> visited(vertices.size(), false);
             DFS_visitor(&visitor, v, visited);
-            std::cout << std::endl;
-            std::cout << "visitor counter " << visitor.GetNumber() << std::endl;
-            std::cout << "vertices size " << vertices.size() << std::endl;
             return (visitor.GetNumber() == vertices.size());
         }
         if (IsDirected())
