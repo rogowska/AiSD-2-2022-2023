@@ -185,10 +185,11 @@ void test(bool IsDirected)
     graph3->AddEdge(8, 6);
     graph3->AddEdge(0, 8);
     graph3->DFS_Spanning_Tree(graph3->SelectVertex(0));
+    std::cout<<std::endl;
     graph3->AddEdge(3, 9);
     graph3->AddEdge(5, 7);
     graph3->AddEdge(9, 8);
-    graph3->DFS_Spanning_Tree(graph.SelectVertex(0));
+    graph3->DFS_Spanning_Tree(graph3->SelectVertex(0));
 }
 
 int main()
