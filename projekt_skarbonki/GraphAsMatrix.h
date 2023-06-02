@@ -181,7 +181,7 @@ public:
     {
         int number = 1;
         std::vector<bool> visited(vertices.size(), false);
-        DFS_visitor(v, visited);
+        DFS_algorithm(v, visited);
         AllVerticesIter iter(*this);
         while (!iter.IsDone())
         {
@@ -192,14 +192,14 @@ public:
                 if (visited[x->Number()] == false)
                 {
                     number++;
-                    DFS_visitor(&(*iter), visited);
+                    DFS_algorithm(&(*iter), visited);
                 }
             }
         }
         std::cout << "Liczba skarbonek do zniszczenia: " << number << std::endl;
     }
 
-    void DFS_visitor(Vertex *v, std::vector<bool> &visited)
+    void DFS_algorithm(Vertex *v, std::vector<bool> &visited)
     {
         int x = v->Number();
         int max_value = adjacencyMatrix.size() - 1;
@@ -215,7 +215,7 @@ public:
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
                 {
-                    DFS_visitor(u, visited);
+                    DFS_algorithm(u, visited);
                 }
             }
         }
@@ -228,7 +228,7 @@ public:
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
                 {
-                    DFS_visitor(u, visited);
+                    DFS_algorithm(u, visited);
                 }
             }
         }
