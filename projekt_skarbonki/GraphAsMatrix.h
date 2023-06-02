@@ -177,37 +177,7 @@ class GraphAsMatrix
         void operator++() { next(); }
     };
 
-public:
-    bool IsConnected()
-    {
-        if (!IsDirected())
-        {
-            Vertex *v = vertices[0];
-            CountingVisitor visitor;
-            std::vector<bool> visited(vertices.size(), false);
-            DFS_visitor(&visitor, v, visited);
-            std::cout << std::endl;
-            return (visitor.GetNumber() == vertices.size());
-        }
-        if (IsDirected())
-        {
-            Vertex *v;
-            int min = vertices.size();
-            for (int i = 0; i < vertices.size(); i++)
-            {
-                v = vertices[i];
-                CountingVisitor visitor;
-                std::vector<bool> visited(vertices.size(), false);
-                DFS_visitor(&visitor, v, visited);
-                if (visitor.GetNumber() < min)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
+public:  
     void DFS(Vertex *v)
     {
         int number = 1;
@@ -228,22 +198,36 @@ public:
                 }
             }
         }
-        std::cout<<"Liczba skarbonek do zniszczenia: "<<number<<std::endl;
+        std::cout << "Liczba skarbonek do zniszczenia: " << number << std::endl;
     }
 
     void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
     {
-        int row = v->Number();
-        int last_col = adjacencyMatrix.size()-1;
+        int x = v->Number();
+        int max_value = adjacencyMatrix.size() - 1;
         visitor->Visit(*v);
         visited[v->Number()] = true;
-        EmanEdgesIter emanIter(*this, row);
+        EmanEdgesIter emanIter(*this, x);
+        InciEdgesIter inciIter(*this, x);
         while (!emanIter.IsDone())
         {
             ++emanIter;
-            if (!emanIter.IsDone() || (emanIter.IsDone() && adjacencyMatrix[last_col][row] != nullptr))
+            if (!emanIter.IsDone() || (emanIter.IsDone() && adjacencyMatrix[max_value][x] != nullptr))
             {
                 Edge vEdge = *emanIter;
+                Vertex *u = vEdge.Mate(v);
+                if (visited[u->Number()] == false)
+                {
+                    DFS_visitor(visitor, u, visited);
+                }
+            }
+        }
+        while (!inciIter.IsDone())
+        {
+            ++inciIter;
+            if (!inciIter.IsDone() || (inciIter.IsDone() && adjacencyMatrix[x][max_value] != nullptr))
+            {
+                Edge vEdge = *inciIter;
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
                 {

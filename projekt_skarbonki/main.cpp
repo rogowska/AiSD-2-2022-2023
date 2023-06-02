@@ -3,7 +3,7 @@
 
 int main()
 {
-    int n;
+    int n, j;
 
     std::cout << "podaj liczbe skarbonek: ";
     std::cin >> n;
@@ -11,8 +11,8 @@ int main()
     GraphAsMatrix graph(n, true);
     for (int i = 0; i < n; i++)
     {
-        std::cin >> n;
-        graph.AddEdge(i+1, n);
+        std::cin >> j;
+        graph.AddEdge(i, j-1);
     }
 
     graph.DFS(graph.SelectVertex(0));
