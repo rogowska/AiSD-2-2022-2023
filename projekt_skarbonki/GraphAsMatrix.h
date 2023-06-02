@@ -3,7 +3,6 @@
 #include "Vertex.h"
 #include "Edge.h"
 #include "Iterator.h"
-#include "CountingVisitor.h"
 
 class GraphAsMatrix
 {
@@ -181,9 +180,8 @@ public:
     void DFS(Vertex *v)
     {
         int number = 1;
-        CountingVisitor visitor;
         std::vector<bool> visited(vertices.size(), false);
-        DFS_visitor(&visitor, v, visited);
+        DFS_visitor(v, visited);
         AllVerticesIter iter(*this);
         while (!iter.IsDone())
         {
@@ -194,18 +192,17 @@ public:
                 if (visited[x->Number()] == false)
                 {
                     number++;
-                    DFS_visitor(&visitor, &(*iter), visited);
+                    DFS_visitor(&(*iter), visited);
                 }
             }
         }
         std::cout << "Liczba skarbonek do zniszczenia: " << number << std::endl;
     }
 
-    void DFS_visitor(CountingVisitor *visitor, Vertex *v, std::vector<bool> &visited)
+    void DFS_visitor(Vertex *v, std::vector<bool> &visited)
     {
         int x = v->Number();
         int max_value = adjacencyMatrix.size() - 1;
-        visitor->Visit(*v);
         visited[v->Number()] = true;
         EmanEdgesIter emanIter(*this, x);
         InciEdgesIter inciIter(*this, x);
@@ -218,7 +215,7 @@ public:
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
                 {
-                    DFS_visitor(visitor, u, visited);
+                    DFS_visitor(u, visited);
                 }
             }
         }
@@ -231,7 +228,7 @@ public:
                 Vertex *u = vEdge.Mate(v);
                 if (visited[u->Number()] == false)
                 {
-                    DFS_visitor(visitor, u, visited);
+                    DFS_visitor(u, visited);
                 }
             }
         }
